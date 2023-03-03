@@ -11,12 +11,12 @@ const showData = allData => {
 
   // Display 6 data conditional statement
   const showAll = document.getElementById('see-more');
-    if(allData.length > 6){
-        showAll.classList.add('d-none');
-    }
-    else{
-        showAll.classList.remove('d-none');
-    }
+  if (allData.length > 6) {
+    showAll.classList.add('d-none');
+  }
+  else {
+    showAll.classList.remove('d-none');
+  }
 
   // Display all data
   allData.forEach(singleData => {
@@ -59,39 +59,98 @@ loadData();
 
 // Spinner Section JS
 
-const toggleSpinner = isLoading =>{
+const toggleSpinner = isLoading => {
   const spinnerSection = document.getElementById('spinner');
-  if(isLoading){
+  if (isLoading) {
     spinnerSection.classList.remove('d-none');
   }
-  else{
+  else {
     spinnerSection.classList.add('d-none');
   }
 }
 
-document.getElementById('btn-see-more').addEventListener('click', function(){
+document.getElementById('btn-see-more').addEventListener('click', function () {
   toggleSpinner(true);
   showData(data.data.tools);
-
 })
 
 
 // See More Section JS
-const seeAllData = async() =>{
+const seeAllData = async () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`
   const response = await fetch(url);
   const data = await response.json();
   showData(data.data.tools);
 }
 
-// 
-const fetchSingleData = (id) =>{
+// Fetching Single Data & Displaying Them 
+const fetchSingleData = (id) => {
   const url_02 = `https://openapi.programming-hero.com/api/ai/tool/${id}`
   fetch(url_02)
-  .then(response => response.json())
-  .then(data => console.log(data.data))
+    .then(response => response.json())
+    .then(data => showSingleData(data.data))
 }
 
-const showSingleData = singleDataDetails =>{
-
+const showSingleData = singleDataDetails => {
+  document.getElementById('modal-body').innerHTML = `
+  <div class="card-body col d-flex container gap-4">
+     <div class="border border-primary">
+         <p class="text-bold text-center fs-6 card-text">${singleDataDetails.description}</p>
+         <div class="d-flex gap-4 container">
+            <div>
+              <h5 class="card-title">Features</h5>
+              <p>
+                 <ul>
+                     <li>${singleDataDetails.features['1'].feature_name}</li>
+                     <li>${singleDataDetails.features['2'].feature_name}</li>
+                     <li>${singleDataDetails.features['3'].feature_name}</li>
+                  </ul>
+              </p>
+            </div>
+            <div>
+            <h5 class="card-title">Integrations</h5>
+            <p>
+                <ul>
+                    <li>${singleDataDetails.integrations}</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+      </div>
+  <div class="border border-primary">
+    <img src="${singleDataDetails.image_link[0]}" class="card-img-top w-100 rounded mx-auto">
+    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input}</p>
+    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output}</p>
+  </div>
+  </div>
+  `;
 }
+
+/*
+
+<div class="container card p-4 mt-4">
+  
+    <div class="card-body">
+      <h5 class="card-title">Features</h5>
+      <p class="card-text">
+      <ol>
+      <li class="${singleDataDetails.features[0] === undefined ? 'd-none' : ''}">${singleDataDetails.features.feature_name}</li>
+      <li class="${singleDataDetails.features[1] === undefined ? 'd-none' : ''}">${singleDataDetails.features[1]}</li>
+      <li class="${singleDataDetails.features[2] === undefined ? 'd-none' : ''}">${singleDataDetails.features[2]}</li>
+      <li class="${singleDataDetails.features[3] === undefined ? 'd-none' : ''}">${singleDataDetails.features[3]}</li>
+      </ol>
+      </p>
+      <hr>
+      <p class="card-text fs-5 fw-semibold">${singleDataDetails.description}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+        <i class="fa-sharp fa-solid fa-calendar-days"></i>
+        <p class="card-text">${singleDataDetails.published_in}</p>
+        </div>
+        <div>
+        <i class="fa-solid fa-arrow-right" onclick="fetchSingleData('${singleDataDetails.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+        </div>
+      </div>  
+    </div>
+  </div> */
+
