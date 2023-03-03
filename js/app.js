@@ -2,12 +2,23 @@ const loadData = async () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`
   const response = await fetch(url);
   const data = await response.json();
-  showData(data.data.tools);
+  showData(data.data.tools.slice(0, 6));
 }
 
 const showData = allData => {
   const allDataContainer = document.getElementById('card-container');
-  // allData = allData.slice(0, 6);
+  allDataContainer.innerHTML = '';
+
+  // Display 6 data conditional statement
+  const showAll = document.getElementById('see-more');
+    if(allData.length > 6){
+        showAll.classList.add('d-none');
+    }
+    else{
+        showAll.classList.remove('d-none');
+    }
+
+  // Display all data
   allData.forEach(singleData => {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('col');
@@ -46,7 +57,7 @@ loadData();
 
 
 
-// Spinner Section
+// Spinner Section JS
 
 const spinnerWrapper = document.querySelector('.spinner-wrapper');
 
@@ -57,3 +68,12 @@ window.addEventListener('load', () => {
     spinnerWrapper.style.display = 'none';
   }, 200);
 })
+
+
+// See More Section JS
+const seeAllData = async() =>{
+  const url = `https://openapi.programming-hero.com/api/ai/tools`
+  const response = await fetch(url);
+  const data = await response.json();
+  showData(data.data.tools);
+}
