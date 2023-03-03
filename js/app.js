@@ -43,7 +43,7 @@ const showData = allData => {
             <p class="card-text">${singleData.published_in}</p>
             </div>
             <div>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-arrow-right" onclick="fetchSingleData('${singleData.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
             </div>
           </div>  
         </div>
@@ -51,22 +51,28 @@ const showData = allData => {
     `;
     allDataContainer.appendChild(cardDiv);
   })
+  toggleSpinner(false);
 }
 
 loadData();
 
 
-
 // Spinner Section JS
 
-const spinnerWrapper = document.querySelector('.spinner-wrapper');
+const toggleSpinner = isLoading =>{
+  const spinnerSection = document.getElementById('spinner');
+  if(isLoading){
+    spinnerSection.classList.remove('d-none');
+  }
+  else{
+    spinnerSection.classList.add('d-none');
+  }
+}
 
-window.addEventListener('load', () => {
-  spinnerWrapper.style.opacity = '0';
+document.getElementById('btn-see-more').addEventListener('click', function(){
+  toggleSpinner(true);
+  showData(data.data.tools);
 
-  setTimeout(() => {
-    spinnerWrapper.style.display = 'none';
-  }, 200);
 })
 
 
@@ -76,4 +82,16 @@ const seeAllData = async() =>{
   const response = await fetch(url);
   const data = await response.json();
   showData(data.data.tools);
+}
+
+// 
+const fetchSingleData = (id) =>{
+  const url_02 = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+  fetch(url_02)
+  .then(response => response.json())
+  .then(data => console.log(data.data))
+}
+
+const showSingleData = singleDataDetails =>{
+
 }
