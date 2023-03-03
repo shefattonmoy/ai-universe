@@ -1,36 +1,34 @@
-const fetchAllData = async() => {
-    const url = `https://openapi.programming-hero.com/api/ai/tools`;
-    const response = await fetch(url);
-    const data = await response.json();
-    showAllData(data.data);
+const loadData = async() =>{
+  const url = `https://openapi.programming-hero.com/api/ai/tools`
+  const response = await fetch(url);
+  const data = await response.json();
+  showData(data.data.tools);
 }
 
-
-
-const showAllData = (data) => {
-    const cardContainer = document.getElementById("card-container");
-    data.tools.slice(0, 6).forEach((singleData) => {
-        const cardDiv = document.createElement('div');
-        cardDiv.classList.add('col');
-        cardDiv.innerHTML = `
-        <div class="card p-4 h-100">
-                    <img src="${singleData.image}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Features</h5>
-                      <p class="card-text">${singleData.features}</p>
-                    </div>
-                    <div class="card-footer">
-                    <h5 class="card-title">${singleData.name}</h5>
-                      <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-        </div>
-        `;
-        cardContainer.appendChild(cardDiv);
-    });
+const showData = allData =>{
+  const allDataContainer = document.getElementById('card-container');
+  allData = allData.slice(0, 6);
+  allData.forEach(singleData =>{
+    const cardDiv = document.createElement('div');
+    cardDiv.classList.add('col');
+    cardDiv.innerHTML = `
+    <div class="card p-4 h-100 mt-4">
+                        <img src="${singleData.image}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Features</h5>
+                          <p class="card-text">${singleData.features}</p>
+                          <hr>
+                          <p class="card-text fs-5 fw-semibold">${singleData.name}</p>
+                        </div>
+                      </div>
+    `;
+    allDataContainer.appendChild(cardDiv);
+  })
 }
 
+loadData();
 
-fetchAllData();
+
 
 // Spinner Section
 
