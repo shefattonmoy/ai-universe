@@ -1,3 +1,5 @@
+// Fetching All Data
+
 const loadData = async () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`
   const response = await fetch(url);
@@ -5,11 +7,13 @@ const loadData = async () => {
   showData(data.data.tools.slice(0, 6));
 }
 
+// Showing All Data Using Arrow Function
+
 const showData = allData => {
   const allDataContainer = document.getElementById('card-container');
   allDataContainer.innerHTML = '';
 
-  // Display 6 data conditional statement
+  // Display 6 Data Conditional Statement
   const showAll = document.getElementById('see-more');
   if (allData.length > 6) {
     showAll.classList.add('d-none');
@@ -18,7 +22,8 @@ const showData = allData => {
     showAll.classList.remove('d-none');
   }
 
-  // Display all data
+  // Display All Data & Creating INNERHTML
+
   allData.forEach(singleData => {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('col');
@@ -43,7 +48,7 @@ const showData = allData => {
             <p class="card-text">${singleData.published_in}</p>
             </div>
             <div>
-            <i class="fa-solid fa-arrow-right" onclick="fetchSingleData('${singleData.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+            <button class="btn btn-danger"><i class="fa-solid fa-arrow-right" onclick="fetchSingleData('${singleData.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></button>
             </div>
           </div>  
         </div>
@@ -57,39 +62,15 @@ const showData = allData => {
 loadData();
 
 
-// Spinner Section JS
-
-const toggleSpinner = isLoading => {
-  const spinnerSection = document.getElementById('spinner');
-  if (isLoading) {
-    spinnerSection.classList.remove('d-none');
-  }
-  else {
-    spinnerSection.classList.add('d-none');
-  }
-}
-
-document.getElementById('btn-see-more').addEventListener('click', function () {
-  toggleSpinner(true);
-  showData(data.data.tools);
-})
-
-
-// See More Section JS
-const seeAllData = async () => {
-  const url = `https://openapi.programming-hero.com/api/ai/tools`
-  const response = await fetch(url);
-  const data = await response.json();
-  showData(data.data.tools);
-}
-
-// Fetching Single Data & Displaying Them 
+// Fetching Single Data
 const fetchSingleData = (id) => {
   const url_02 = `https://openapi.programming-hero.com/api/ai/tool/${id}`
   fetch(url_02)
     .then(response => response.json())
     .then(data => showSingleData(data.data))
 }
+
+// Displaying Single Data
 
 const showSingleData = singleDataDetails => {
   document.getElementById('modal-body').innerHTML = `
@@ -134,31 +115,31 @@ const showSingleData = singleDataDetails => {
   `;
 }
 
-/*
 
-<div class="container card p-4 mt-4">
-  
-    <div class="card-body">
-      <h5 class="card-title">Features</h5>
-      <p class="card-text">
-      <ol>
-      <li class="${singleDataDetails.features[0] === undefined ? 'd-none' : ''}">${singleDataDetails.features.feature_name}</li>
-      <li class="${singleDataDetails.features[1] === undefined ? 'd-none' : ''}">${singleDataDetails.features[1]}</li>
-      <li class="${singleDataDetails.features[2] === undefined ? 'd-none' : ''}">${singleDataDetails.features[2]}</li>
-      <li class="${singleDataDetails.features[3] === undefined ? 'd-none' : ''}">${singleDataDetails.features[3]}</li>
-      </ol>
-      </p>
-      <hr>
-      <p class="card-text fs-5 fw-semibold">${singleDataDetails.description}</p>
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="d-flex">
-        <i class="fa-sharp fa-solid fa-calendar-days"></i>
-        <p class="card-text">${singleDataDetails.published_in}</p>
-        </div>
-        <div>
-        <i class="fa-solid fa-arrow-right" onclick="fetchSingleData('${singleDataDetails.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-        </div>
-      </div>  
-    </div>
-  </div> */
+// Spinner Section 
+
+const toggleSpinner = isLoading => {
+  const spinnerSection = document.getElementById('spinner');
+  if (isLoading) {
+    spinnerSection.classList.remove('d-none');
+  }
+  else {
+    spinnerSection.classList.add('d-none');
+  }
+}
+
+document.getElementById('btn-see-more').addEventListener('click', function () {
+  toggleSpinner(true);
+  showData(data.data.tools);
+})
+
+
+// See More Section
+const seeAllData = async () => {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`
+  const response = await fetch(url);
+  const data = await response.json();
+  showData(data.data.tools);
+}
+
 
