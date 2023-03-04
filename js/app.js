@@ -94,16 +94,16 @@ const fetchSingleData = (id) => {
 const showSingleData = singleDataDetails => {
   document.getElementById('modal-body').innerHTML = `
   <div class="card-body col d-flex container gap-4">
-     <div class="border border-primary">
-         <p class="text-bold text-center fs-6 card-text">${singleDataDetails.description}</p>
+     <div class="border border-primary" style="background-color: rgba(235, 87, 87, 0.05)";>
+         <p class="text-bold text-center fs-6 card-text">${singleDataDetails.description? singleDataDetails.description : 'Not available'}</p>
          <div class="d-flex gap-4 container">
             <div>
               <h5 class="card-title">Features</h5>
               <p>
                  <ul>
-                     <li>${singleDataDetails.features['1'].feature_name}</li>
-                     <li>${singleDataDetails.features['2'].feature_name}</li>
-                     <li>${singleDataDetails.features['3'].feature_name}</li>
+                     <li>${singleDataDetails.features['1'].feature_name? singleDataDetails.features['1'].feature_name : 'No data found'}</li>
+                     <li>${singleDataDetails.features['2'].feature_name? singleDataDetails.features['2'].feature_name : 'No data found'}</li>
+                     <li>${singleDataDetails.features['3'].feature_name? singleDataDetails.features['3'].feature_name : 'No data found'}</li>
                   </ul>
               </p>
             </div>
@@ -111,16 +111,17 @@ const showSingleData = singleDataDetails => {
             <h5 class="card-title">Integrations</h5>
             <p>
                 <ul>
-                    <li>${singleDataDetails.integrations}</li>
+                    <li>${singleDataDetails.integrations? singleDataDetails.integrations : 'Not available'}</li>
                 </ul>
               </p>
             </div>
           </div>
       </div>
   <div class="border border-primary">
-    <img src="${singleDataDetails.image_link[0]}" class="card-img-top w-100 rounded mx-auto">
-    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input}</p>
-    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output}</p>
+    <img src="${singleDataDetails.image_link[0] ? singleDataDetails.image_link[0] : 'Not available'}" class="card-img-top w-100 rounded mx-auto">
+    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input? singleDataDetails.input_output_examples[0].input : 'Not available'}</p>
+    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output? singleDataDetails.input_output_examples[0].output : 'Not available'}</p>
+    <button id="accuracy" class="btn btn-danger px-4 py-1 mt-3 text-white font-semibold fs-5" style="position: absolute; transform: translate(600%, -1100%);">${singleDataDetails.accuracy.score ? singleDataDetails.accuracy.score * (100) : 'Not available'}</button>
   </div>
   </div>
   `;
