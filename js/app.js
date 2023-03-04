@@ -94,9 +94,16 @@ const fetchSingleData = (id) => {
 const showSingleData = singleDataDetails => {
   document.getElementById('modal-body').innerHTML = `
   <div class="card-body col d-flex container gap-4">
-     <div class="border border-primary" style="background-color: rgba(235, 87, 87, 0.05)";>
-         <p class="text-bold text-center fs-6 card-text">${singleDataDetails.description? singleDataDetails.description : 'Not available'}</p>
-         <div class="d-flex gap-4 container">
+     <div class="rounded-3" style="background-color: rgba(235, 87, 87, 0.05)";>
+         <p class="container text-bold text-center fs-6 card-text mt-4">${singleDataDetails.description? singleDataDetails.description : 'No data found'}</p>
+         <div class="d-lg-flex flex-row justify-content-center container gap-4">
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[0].price? singleDataDetails.pricing[0].price: 'Free'}<br><br>${singleDataDetails.pricing[0].plan}</small></div>
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[1].price? singleDataDetails.pricing[1].price: 'Free'}<br><br>${singleDataDetails.pricing[1].plan}</small></div>
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[2].price? singleDataDetails.pricing[2].price: 'Free'}<br><br>${singleDataDetails.pricing[2].plan}</small></div>
+         
+         </div>
+         
+         <div class="d-flex gap-4 container mt-4">
             <div>
               <h5 class="card-title">Features</h5>
               <p>
@@ -111,17 +118,17 @@ const showSingleData = singleDataDetails => {
             <h5 class="card-title">Integrations</h5>
             <p>
                 <ul>
-                    <li>${singleDataDetails.integrations? singleDataDetails.integrations : 'Not available'}</li>
+                    <li>${singleDataDetails.integrations? singleDataDetails.integrations : 'No data found'}</li>
                 </ul>
               </p>
             </div>
           </div>
       </div>
-  <div class="border border-primary">
-    <img src="${singleDataDetails.image_link[0] ? singleDataDetails.image_link[0] : 'Not available'}" class="card-img-top w-100 rounded mx-auto">
-    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input? singleDataDetails.input_output_examples[0].input : 'Not available'}</p>
-    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output? singleDataDetails.input_output_examples[0].output : 'Not available'}</p>
-    <button id="accuracy" class="btn btn-danger px-4 py-1 mt-3 text-white font-semibold fs-5" style="position: absolute; transform: translate(600%, -1100%);">${singleDataDetails.accuracy.score ? singleDataDetails.accuracy.score * (100) : 'Not available'}</button>
+  <div>
+    <img src="${singleDataDetails.image_link[0] ? singleDataDetails.image_link[0] : 'No data found'}" class="card-img-top w-100 rounded mx-auto">
+    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input? singleDataDetails.input_output_examples[0].input : 'No data found'}</p>
+    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output? singleDataDetails.input_output_examples[0].output : 'No data found'}</p>
+    <button id="accuracy" class="btn btn-danger px-4 py-1 mt-3 text-white font-semibold fs-5" style="position: absolute; transform: translate(600%, -1100%);">${singleDataDetails.accuracy.score ? singleDataDetails.accuracy.score * (100) : 'No data found'}</button>
   </div>
   </div>
   `;
