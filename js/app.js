@@ -78,9 +78,9 @@ const showSingleData = singleDataDetails => {
      <div class="rounded-3" style="background-color: rgba(235, 87, 87, 0.05)";>
          <p class="container text-bold text-center fs-6 card-text mt-4">${singleDataDetails.description? singleDataDetails.description : 'No data found'}</p>
          <div class="d-lg-flex flex-row justify-content-center container gap-4">
-         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[0].price? singleDataDetails.pricing[0].price: 'Free'}<br><br>${singleDataDetails.pricing[0].plan}</small></div>
-         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[1].price? singleDataDetails.pricing[1].price: 'Free'}<br><br>${singleDataDetails.pricing[1].plan}</small></div>
-         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[2].price? singleDataDetails.pricing[2].price: 'Free'}<br><br>${singleDataDetails.pricing[2].plan}</small></div>
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[0].price? singleDataDetails.pricing[0].price: 'Free of Cost'}<br><br>${singleDataDetails.pricing[0].plan}</small></div>
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[1].price? singleDataDetails.pricing[1].price: 'Free of Cost'}<br><br>${singleDataDetails.pricing[1].plan}</small></div>
+         <div class="text-center fw-bold fs-5 bg-body-secondary rounded-3 p-4 text-primary"><small>${singleDataDetails.pricing[2].price? singleDataDetails.pricing[2].price: 'Free of Cost'}<br><br>${singleDataDetails.pricing[2].plan}</small></div>
          
          </div>
          
@@ -107,8 +107,8 @@ const showSingleData = singleDataDetails => {
       </div>
   <div>
     <img src="${singleDataDetails.image_link[0] ? singleDataDetails.image_link[0] : 'No data found'}" class="card-img-top w-100 rounded mx-auto">
-    <p class="fw-bold fs-4 text-center">${singleDataDetails.input_output_examples[0].input? singleDataDetails.input_output_examples[0].input : 'No data found'}</p>
-    <p class="text-center fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output? singleDataDetails.input_output_examples[0].output : 'No data found'}</p>
+    <p class="fw-bold fs-4 text-center mt-4">${singleDataDetails.input_output_examples[0].input? singleDataDetails.input_output_examples[0].input : 'No data found'}</p>
+    <p class="text-center text-secondary fw-semibold fs-5">${singleDataDetails.input_output_examples[0].output? singleDataDetails.input_output_examples[0].output : 'No data found'}</p>
     <button id="accuracy" class="btn btn-danger px-4 py-1 mt-3 text-white font-semibold fs-5" style="position: absolute; transform: translate(600%, -1100%);">${singleDataDetails.accuracy.score ? singleDataDetails.accuracy.score * (100) : 'No data found'}</button>
   </div>
   </div>
